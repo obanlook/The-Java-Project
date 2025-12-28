@@ -1,51 +1,78 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Inventory {
-    private ArrayList<Item> items;
-    private final int maxCapacity = 6;
+    private List<Item> items;
+    private final int MAX = 6;
+
+    public Inventory(){
+        items = new ArrayList<>(MAX);
+
+    }
 
 
     public boolean addItem(Item item){
-        if(items.size() < maxCapacity){
-            items.add(item);
-            return true;
+        if(items.size() >= MAX){
+            System.out.println("you can't have more than "+MAX+" items");
+            return false;
         }
-        return false;
+        if(this.hasItem(item.getName())){
+            System.out.println("You already have this item!");
+            return false;
 
+        }
+        items.add(item);
+        return true;
     }
+
     public boolean removeItem(Item item){
-        if(items.contains(item)){
-            items.remove(item);
-            return true;
+        if(!this.hasItem(item.getName())){
+            System.out.println("You don't have this item!");
+        }
+        //remove every item that has the same name with the input item
+        for(Item i : items){
+            if(i.getName().equalsIgnoreCase(item.getName())){
+                items.remove(i);
+                return true;
+            }
         }
         return false;
     }
 
-    public Item getItem(String ItemName){
-        for(Item item : items){
-            System.out.println("Item Name: " + ItemName);
-            if(item.name.equals(ItemName)) return item;
-        }
-        System.out.println("Item does not exist");
-        return null;
-
+    public boolean hasItem(String name) {
+        return getItem(name) != null;
     }
 
-    public ArrayList<Item> getItems(){
-        return items;
+    //Getter
+
+    //get by name
+    public Item getItem(String itemName){
+        for (Item item : items) {
+            if (item.getName().equalsIgnoreCase(itemName))
+                return item;
+        }
+        return null;
+    }
+
+    //get the whole items
+    //does not return the actual list but the copy
+    public List<Item> getItems() {
+        return new ArrayList<>(items);//https://stackoverflow.com/questions/8441664/how-do-i-copy-the-contents-of-one-arraylist-into-another
+    }
+
+    public int getMAX() {
+        return MAX;
+    }
+
+    public int count(){
+        return items.size();
     }
 
     public boolean isFull(){
-        return items.size() == maxCapacity;
+        return items.size() == MAX;
     }
 
-    public void showItems(){
-        System.out.println("Items in Inventory:");
-        for(Item item : items){
-            System.out.print(item);
 
-        }
-    }
 
 
 
