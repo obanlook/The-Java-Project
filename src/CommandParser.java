@@ -8,7 +8,7 @@ public class CommandParser {
 
     // VALID COMMANDS
     private static final Set<String> VALID = new HashSet<>(
-            Arrays.asList("go", "look", "inventory", "help", "take", "talk", "use", "quit", "status","explain")
+            Arrays.asList("go", "look", "inventory", "help", "take", "drop", "talk", "use", "quit", "status","explain")
     );
 
     public CommandParser(Game game) {
@@ -65,6 +65,10 @@ public class CommandParser {
             case "take":
                 if (parts.length < 2) return new UnknownCommand();
                 return new TakeCommand(parts[1]);
+
+            case "drop":
+                if (parts.length < 2) return new UnknownCommand();
+                return new DropCommand(parts[1]);
 
             case "use":
                 if (parts.length < 2) return new UnknownCommand();
