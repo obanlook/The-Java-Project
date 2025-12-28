@@ -1,6 +1,6 @@
 public enum GameState {
     PLAYING,
-    GAMEOVER,
+    QUIT,
     WON,
     LOST
 }

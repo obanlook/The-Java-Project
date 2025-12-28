@@ -1,24 +1,31 @@
-import java.lang.reflect.Array;
-import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
+import java.util.Map;
 
-public class EngineCoach extends Location{
-    private boolean isFixed = false;
-    private List<Item> requiredItems = new ArrayList<>(); //items for fixing the engine
-    private List<Character> characters = new ArrayList<>();
-    public EngineCoach(){
-        super("Engine",
-                "This is engine coach.\n help mechanic to fix the engine! ",
+public class EngineCoach extends Location {
+    private boolean fixed = false;
+    private List<Item> requiredItems = new ArrayList<>();
+
+    public EngineCoach() {
+        super(
+                "Engine Coach",
+                "This is the engine coach. Help the mechanic fix the engine!",
                 false, // locked?
-                 false // dark?
+                true // dark?
+
         );
+
+        // The engine requires a wrench to be fixed
         requiredItems.add(new Wrench());
-        characters.add(new Mechaninc());
-
-
-
     }
+
+
+    public boolean isFixed() {
+        return fixed;
+    }
+
+    public void fixEngine() {
+        fixed = true;
+    }
+
 }
