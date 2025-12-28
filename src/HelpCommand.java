@@ -16,6 +16,8 @@ public class HelpCommand implements Command {
         System.out.println("      Show your current state (time, inventory, location).");
         System.out.println("• take <item>");
         System.out.println("      Pick up an item from the ground.");
+        System.out.println("• drop <item>");
+        System.out.println("      Drop an item to the ground.");
         System.out.println("• use <item>");
         System.out.println("      Use an item from your inventory.");
         System.out.println("• talk <character>");
