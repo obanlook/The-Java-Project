@@ -1,9 +1,9 @@
-public class TakeCommand implements Command {
+public class DropCommand implements Command {
 
-    private static final int COST = 1;
+    private static final int COST = 0;
     private final String itemName;
 
-    public TakeCommand(String itemName) {
+    public DropCommand(String itemName) {
         this.itemName = itemName;
     }
 
@@ -13,7 +13,7 @@ public class TakeCommand implements Command {
         Location location = player.getCurrentLocation();
 
         // Find item safely using Location API
-        Item targetItem = location.getItemByName(itemName);
+        Item targetItem = player.getInventory().getItem(itemName);
 
         if (targetItem == null) {
             System.out.println("There is no item '" + itemName + "' in this location.");
@@ -21,18 +21,18 @@ public class TakeCommand implements Command {
             return;
         }
 
-        // Try adding to inventory
-        boolean added = player.getInventory().addItem(targetItem);
-        if (!added) {
-            System.out.println("Your inventory is full. You cannot take '" + targetItem.getName() + "'.");
+        // Try removing from inventory
+        boolean dropped = player.getInventory().removeItem(targetItem);
+        if (!dropped) {
+            System.out.println("Item is still in your inventory, try again");
             game.handleActionCost(COST);
             return;
         }
 
-        // Remove item SAFELY using Location API (not list returned by getter!)
-        location.removeItemByName(itemName);
+        // Return item SAFELY using Location API (not list returned by getter!)
+        location.addItem(targetItem);
 
-        System.out.println("You picked up the " + targetItem.getName() + ".");
+        System.out.println("You dropped the " + targetItem.getName() + ".");
         game.handleActionCost(COST);
     }
 }
