@@ -46,9 +46,9 @@ public class Game {
             checkLose();
         }
         switch (gameState) {
-            case WON : System.out.println("You Won!");
-            case LOST : System.out.println("You Lost!\nTime is over!");
-            case QUIT : System.out.println("You Quit!\nDo you want to try again?");
+            case WON  -> System.out.println("You Won!");
+            case LOST -> System.out.println("You Lost!\nTime is over!");
+            case QUIT -> System.out.println("You Quit!\nDo you want to try again?");
         }
 
 
