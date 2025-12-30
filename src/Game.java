@@ -46,6 +46,7 @@ public class Game {
             checkLose();
         }
         switch (gameState) {
+            //https://docs.oracle.com/en/java/javase/14/language/switch-expressions.html#GUID-BA4F63E3-4823-43C6-A5F3-BAA4A2EF3ADC
             case WON  -> System.out.println("You Won!");
             case LOST -> System.out.println("You Lost!\nTime is over!");
             case QUIT -> System.out.println("You Quit!\nDo you want to try again?");
