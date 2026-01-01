@@ -7,11 +7,11 @@ public abstract class Location {
 
     private final String name;
     private final String description;
-    private Map<Direction, Location> exits = new HashMap<>();
-    private List<Item> groundItems = new ArrayList<>();
-    private List<NPC> npcs = new ArrayList<>();
+    private final Map<Direction, Location> exits = new HashMap<>();
+    private final List<Item> groundItems = new ArrayList<>();
+    private final List<NPC> npcs = new ArrayList<>();
+    private final boolean dark;
     private boolean locked;
-    private boolean dark;
     private boolean light = false;//if there is something like flashlight or candle
 
     public Location(String name, String description, boolean locked, boolean dark) {
@@ -26,13 +26,11 @@ public abstract class Location {
         groundItems.add(item);
     }
 
-    public boolean removeItemByName(String itemName) {
+    public void removeItemByName(String itemName) {
         Item target = getItemByName(itemName);
         if (target != null) {
             groundItems.remove(target);
-            return true;
         }
-        return false;
     }
 
 
@@ -52,6 +50,7 @@ public abstract class Location {
     }
 
     public void enlighten() {
+
         light = true;
     }
 
@@ -61,40 +60,49 @@ public abstract class Location {
     }
 
     public void unlock() {
+
         locked = false;
     }
 
     //for connecting locations
     public void setExit(Direction direction, Location location) {
+
         exits.put(direction, location);
     }
 
     // Getters
     public String getName() {
+
         return name;
     }
 
     public String getDescription() {
+
         return description;
     }
 
     public Location getExit(Direction direction) {
+
         return exits.get(direction);
     }
 
     public List<Item> getGroundItems() {
+
         return new ArrayList<>(groundItems); // return copy
     }
 
     public List<NPC> getCharacters() {
+
         return new ArrayList<>(npcs); // return copy
     }
 
     public boolean isLocked() {
+
         return locked;
     }
 
     public boolean isDark() {
+
         return dark;
     }
 

@@ -3,7 +3,7 @@ import java.util.List;
 public class Dictionary extends Item {
 
     public Dictionary() {
-        super("Dictionary", "A French to English dictionary.\nIt will cost you 2 turns but you can talk to any french person.");
+        super("Dictionary", "A French to English dictionary.\n you can talk to any french person.");
     }
 
     //we assume that the NPC will learn and remember the phrase after first time using the dictionary

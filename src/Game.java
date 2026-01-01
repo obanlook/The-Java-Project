@@ -3,8 +3,7 @@ import java.util.Scanner;
 public class Game {
     private Player player;
     private CommandParser commandParser;
-    //since the state of the game depends on here
-    private EngineCoach engineCoach;
+    private WinCondition winCondition;
     private GameState gameState;
 
     public Game() {
@@ -19,7 +18,6 @@ public class Game {
 
         //Game introduction
         System.out.println("Welcome to the Subway Survival Game!");
-
         System.out.println("Press enter to continue...");
         Scanner input = new Scanner(System.in);
         input.nextLine();
@@ -55,6 +53,10 @@ public class Game {
 
     }
 
+
+
+
+
     public void setupWorld() {
 
         // Create locations
@@ -62,7 +64,8 @@ public class Game {
         FamilyCoach familyCoach = new FamilyCoach();
         CafeCoach cafeCoach = new CafeCoach();
         ServiceCoach serviceCoach = new ServiceCoach();
-        engineCoach = new EngineCoach();
+        EngineCoach engineCoach = new EngineCoach();
+
 
         // Connect exits
         // cafe-economy-family-service-engine
@@ -74,6 +77,7 @@ public class Game {
         serviceCoach.setExit(Direction.SOUTH, familyCoach);
         serviceCoach.setExit(Direction.NORTH, engineCoach);
         engineCoach.setExit(Direction.SOUTH, serviceCoach);
+
         // Items
         //Cafe
         cafeCoach.addItem(new AccessCard());
@@ -93,12 +97,15 @@ public class Game {
         engineCoach.addNPC(new Mechanic());
 
         // Player setup
-        player = new Player(this, economyCoach); // starting point
+        player = new Player(economyCoach); // starting point
+        // game changer location
+        this.winCondition = engineCoach;// since the player will win here
 
     }
 
     //for quitting to set the state into QUIT
     public void setGameState(GameState gameState) {
+
         this.gameState = gameState;
     }
 
@@ -116,7 +123,7 @@ public class Game {
     }
 
     public void checkWin() {
-        boolean win = engineCoach.isFixed();
+        boolean win = winCondition.isSatisfied();
         if (win) {
             gameState = GameState.WON;
         }

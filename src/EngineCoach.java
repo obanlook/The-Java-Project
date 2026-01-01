@@ -2,9 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class EngineCoach extends Location {
+public class EngineCoach extends Location implements WinCondition {
     private boolean fixed = false;
-    //private List<Item> requiredItems = new ArrayList<>();
 
     public EngineCoach() {
         super(
@@ -15,17 +14,15 @@ public class EngineCoach extends Location {
 
         );
 
-        // The engine requires a wrench to be fixed
-        //requiredItems.add(new Wrench());
+
     }
-
-
-    public boolean isFixed() {
-        return fixed;
-    }
-
     public void fixEngine() {
         fixed = true;
+    }
+
+    @Override
+    public boolean isSatisfied() {
+        return fixed;
     }
 
 }
