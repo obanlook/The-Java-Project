@@ -6,20 +6,17 @@ public class Dictionary extends Item {
         super("Dictionary", "A French to English dictionary.\nIt will cost you 2 turns but you can talk to any french person.");
     }
 
-    @Override
-    public String examine() {
-        return "A precise dictionary. It will cost you 2 turns but you can talk to any french person.";
-    }
-
+    //we assume that the NPC will learn and remember the phrase after first time using the dictionary
+    // (no need to use dictionary again for saying the same sentence.)
     @Override
     public boolean use(Player player) {
         Location location = player.getCurrentLocation();
-        List<Character> characters = location.getCharacters();
-        for(Character character : characters) {
-            if(character.canSpeak(Language.FRENCH)){
-                character.addLanguage(Language.ENGLISH);
-                System.out.println("Character '"+character.getName()+"' can understand English now!");
-                return true;
+        List<NPC> npcs = location.getCharacters();
+        for(NPC npc : npcs) {
+            if(npc.canSpeak(Language.FRENCH)){
+                npc.addLanguage(Language.ENGLISH);
+                System.out.println("NPC '"+ npc.getName()+"' can understand English now!");
+                return true;//effective usage
             }
 
         }

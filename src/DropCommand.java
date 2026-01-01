@@ -13,7 +13,7 @@ public class DropCommand implements Command {
         Location location = player.getCurrentLocation();
 
         // Find item safely using Location API
-        Item targetItem = player.getInventory().getItem(itemName);
+        Item targetItem = player.getInventory().getItemByName(itemName);
 
         if (targetItem == null) {
             System.out.println("There is no item '" + itemName + "' in this location.");

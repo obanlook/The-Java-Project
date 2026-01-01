@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class EngineCoach extends Location {
     private boolean fixed = false;
-    private List<Item> requiredItems = new ArrayList<>();
+    //private List<Item> requiredItems = new ArrayList<>();
 
     public EngineCoach() {
         super(
@@ -16,7 +16,7 @@ public class EngineCoach extends Location {
         );
 
         // The engine requires a wrench to be fixed
-        requiredItems.add(new Wrench());
+        //requiredItems.add(new Wrench());
     }
 
 

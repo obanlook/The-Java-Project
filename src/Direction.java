@@ -4,6 +4,8 @@ public enum Direction {
     WEST("west");//wall
     public final String name;
 
+    //in enums, the constructor must be private and for public we get error
+    //since only the enum class can creat its objects and the constructor method is automatically private
     private Direction(String name) {
         this.name = name;
     }

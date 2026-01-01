@@ -13,8 +13,8 @@ public class TalkCommand implements Command {
         Location location = player.getCurrentLocation();
 
         // Find the target character
-        Character target = null;
-        for (Character c : location.getCharacters()) {
+        NPC target = null;
+        for (NPC c : location.getCharacters()) {
             if (c.getName().equalsIgnoreCase(characterName)) {
                 target = c;
                 break;

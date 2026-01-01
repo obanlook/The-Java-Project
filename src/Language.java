@@ -1,4 +1,5 @@
 public enum Language {
     ENGLISH,
-    FRENCH
+    FRENCH,
+    SPANISH
 }

@@ -10,7 +10,7 @@ public class UseCommand implements Command {
     @Override
     public void execute(Player player, Game game) {
         //find the item by its name
-        Item item = player.getInventory().getItem(itemName);
+        Item item = player.getInventory().getItemByName(itemName);
 
         if (item == null) {
             System.out.println("You don't have a/an " + itemName + ".");

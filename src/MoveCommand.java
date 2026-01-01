@@ -28,7 +28,7 @@ public class MoveCommand implements Command {
         }
 
         // if the next coach is locked
-        if (next.isLocked()&& !player.hasItem("AccessCard")) {
+        if (next.isLocked()&& !player.hasItemByName("AccessCard")) {
             System.out.println("This coach is locked. You need Access Card to enter");
             game.handleActionCost(COST);
             return;

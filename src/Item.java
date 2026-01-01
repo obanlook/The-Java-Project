@@ -9,7 +9,7 @@ public abstract class Item {
     }
 
 
-    public abstract String examine();
+    //abstract method(s)
     public abstract boolean use(Player player);
 
     // Getters

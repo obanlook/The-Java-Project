@@ -1,9 +1,7 @@
-public class Conductor extends Character {
+public class Conductor extends NPC {
 
     public Conductor() {
-        super("Conductor", false);
-
-
+        super("Conductor");
         addLanguage(Language.FRENCH);
 
     }
@@ -13,8 +11,4 @@ public class Conductor extends Character {
         return "Welcome. The mechanic is ahead in the engine coach.";
     }
 
-    @Override
-    public String examine(Player player) {
-        return "A uniformed conductor checking the compartments and ensuring everything is in order.";
-    }
 }

@@ -4,10 +4,6 @@ public class Candle extends Item {
         super("Candle", "A candle that helps you see in dark coaches.");
     }
 
-    @Override
-    public String examine() {
-        return "A reliable candle. It allows you to navigate in dark coaches.";
-    }
 
     @Override
     public boolean use(Player player) {
@@ -16,6 +12,7 @@ public class Candle extends Item {
         player.getInventory().removeItem(this);
         //candle is a groundItem in that location
         location.addItem(this);
+        //the effect of using candle
         if (location.isDark()) {
             location.enlighten();
             System.out.println("You turned on the Candle. The darkness fades away...");
