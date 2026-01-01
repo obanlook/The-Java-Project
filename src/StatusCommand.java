@@ -12,16 +12,18 @@ public class StatusCommand implements Command {
 
         // Languages player knows
         System.out.print("Languages you can communicate with: ");
+        //just in case :)
         if (player.getLanguages().isEmpty()) {
             System.out.println("(none)");
         } else {
+            System.out.print("[ ");
             for (Language lang : player.getLanguages()) {
-                System.out.print(lang + " ");
+                System.out.print(lang+" ");
             }
-            System.out.println();
+            System.out.print("]\n");
         }
 
-        System.out.println("==========================\n");
+        System.out.println("==========================");
         game.handleActionCost(COST);
     }
 }

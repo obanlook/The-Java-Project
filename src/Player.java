@@ -14,8 +14,9 @@ public class Player {
         this.currentLocation = startLocation;
         this.timeRemaining = 30;
 
-        // Initially, player can only interact with people knowing English
+        //player can only interact with people knowing English and Spanish
         languages.add(Language.ENGLISH);
+        languages.add(Language.SPANISH);
 
         this.inventory = new Inventory();
     }
@@ -29,25 +30,19 @@ public class Player {
         return timeRemaining <= 0;
     }
 
-    // Movement (used indirectly by MoveCommand)
+    // Movement (used by MoveCommand)
     public void moveTo(Location next) {
         this.currentLocation = next;
     }
 
     // Language Management
-
-    //After using dictionary
-    public void learnLanguage(Language language) {
-        languages.add(language);
-    }
-
     public boolean canUnderstand(Language language) {
         return languages.contains(language);
     }
 
     // Inventory helper for quicker access
-    public boolean hasItem(String itemName) {
-        return inventory.hasItem(itemName);
+    public boolean hasItemByName(String itemName) {
+        return inventory.hasItemByName(itemName);
     }
 
     // Getters
@@ -71,9 +66,5 @@ public class Player {
     public void setTimeRemaining(int timeRemaining) {
         this.timeRemaining = timeRemaining;
     }
-
-
-
-
 
 }

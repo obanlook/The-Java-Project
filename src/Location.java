@@ -9,7 +9,7 @@ public abstract class Location {
     private final String description;
     private Map<Direction, Location> exits = new HashMap<>();
     private List<Item> groundItems = new ArrayList<>();
-    private List<Character> characters = new ArrayList<>();
+    private List<NPC> npcs = new ArrayList<>();
     private boolean locked;
     private boolean dark;
     private boolean light = false;//if there is something like flashlight or candle
@@ -22,23 +22,8 @@ public abstract class Location {
     }
 
     // Core actions
-
-
     public void addItem(Item item) {
         groundItems.add(item);
-    }
-
-    public void removeItem(Item item) {
-        groundItems.remove(item);
-    }
-
-    public Item getItemByName(String itemName) {
-        for (Item item : groundItems) {
-            if (item.getName().equalsIgnoreCase(itemName)) {
-                return item;
-            }
-        }
-        return null;
     }
 
     public boolean removeItemByName(String itemName) {
@@ -50,36 +35,36 @@ public abstract class Location {
         return false;
     }
 
-    public void addCharacter(Character character) {
-        characters.add(character);
-    }
 
-    public void removeCharacter(Character character) {
-        characters.remove(character);
-    }
-
-    public void removeCharacterByName(String characterName) {
-        for(Character character : characters) {
-            if (character.getName().equalsIgnoreCase(characterName)) {
-                characters.remove(character);
+    //avoid searching by the instance's address and instead search by the name of the item(item is equal to another item if they have the same name)
+    public Item getItemByName(String itemName) {
+        for (Item item : groundItems) {
+            if (item.getName().equalsIgnoreCase(itemName)) {
+                return item;
             }
         }
+        return null;
     }
 
-    public void enlighten(){
+
+    public void addNPC(NPC npc) {
+        npcs.add(npc);
+    }
+
+    public void enlighten() {
         light = true;
     }
+
     //player can see whether the coach is not dark or at least has a light
-    public boolean canSee(){
-      return (!dark || light);
+    public boolean canSee() {
+        return (!dark || light);
     }
 
-    public void unlock(){
+    public void unlock() {
         locked = false;
     }
 
-
-
+    //for connecting locations
     public void setExit(Direction direction, Location location) {
         exits.put(direction, location);
     }
@@ -101,8 +86,8 @@ public abstract class Location {
         return new ArrayList<>(groundItems); // return copy
     }
 
-    public List<Character> getCharacters() {
-        return new ArrayList<>(characters); // return copy
+    public List<NPC> getCharacters() {
+        return new ArrayList<>(npcs); // return copy
     }
 
     public boolean isLocked() {
@@ -124,8 +109,8 @@ public abstract class Location {
 
     public String showCharacters() {
         StringBuilder ans = new StringBuilder();
-        for (Character character : characters) {
-            ans.append(character.getName()).append("\n");
+        for (NPC npc : npcs) {
+            ans.append(npc.getName()).append("\n");
         }
         return ans.toString();
     }

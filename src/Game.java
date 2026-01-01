@@ -3,18 +3,14 @@ import java.util.Scanner;
 public class Game {
     private Player player;
     private CommandParser commandParser;
-    private Location currentLocation;
+    //since the state of the game depends on here
     private EngineCoach engineCoach;
     private GameState gameState;
+
     public Game() {
         setupWorld();//initialize the locations, items, characters and player
         commandParser = new CommandParser(this);
         gameState = GameState.PLAYING;
-
-
-
-
-
 
 
     }
@@ -28,13 +24,13 @@ public class Game {
         Scanner input = new Scanner(System.in);
         input.nextLine();
         //explain the game
-        ExplainCommand explainCommand = new ExplainCommand();
-        explainCommand.execute(player,this);
+        Command explainCommand = new ExplainCommand();
+        explainCommand.execute(player, this);
         //Commands introduction
         System.out.println("Press enter to see the valid commands...");
         input.nextLine();
-        HelpCommand help = new HelpCommand();
-        help.execute(player,this);
+        Command help = new HelpCommand();
+        help.execute(player, this);
         //going to gameLoop to actually play the game
         gameLoop();
 
@@ -45,14 +41,15 @@ public class Game {
         while (gameState == GameState.PLAYING) {
             String stringCommand = input.nextLine();
             Command command = processCommand(stringCommand);
-            command.execute(player,this);
+            command.execute(player, this);
             checkWin();
             checkLose();
         }
-        switch(gameState) {
-            case WON ->  System.out.println("You Won!");
+        switch (gameState) {
+            //https://docs.oracle.com/en/java/javase/14/language/switch-expressions.html#GUID-BA4F63E3-4823-43C6-A5F3-BAA4A2EF3ADC
+            case WON  -> System.out.println("You Won!");
             case LOST -> System.out.println("You Lost!\nTime is over!");
-            case QUIT ->  System.out.println("You Quit!\nDo you want to try again?");
+            case QUIT -> System.out.println("You Quit!\nDo you want to try again?");
         }
 
 
@@ -77,7 +74,7 @@ public class Game {
         serviceCoach.setExit(Direction.SOUTH, familyCoach);
         serviceCoach.setExit(Direction.NORTH, engineCoach);
         engineCoach.setExit(Direction.SOUTH, serviceCoach);
-    // Items
+        // Items
         //Cafe
         cafeCoach.addItem(new AccessCard());
         //Economy
@@ -87,27 +84,23 @@ public class Game {
         //Service
         serviceCoach.addItem(new Wrench());
 
-    // Characters
+        // Characters
         //Economy
-        economyCoach.addCharacter(new OldMan());
-        //family
-
+        economyCoach.addNPC(new OldMan());
         //Service
-        serviceCoach.addCharacter(new Conductor());
+        serviceCoach.addNPC(new Conductor());
         //Engine
-        engineCoach.addCharacter(new Mechanic());
+        engineCoach.addNPC(new Mechanic());
 
         // Player setup
         player = new Player(this, economyCoach); // starting point
 
     }
 
+    //for quitting to set the state into QUIT
     public void setGameState(GameState gameState) {
         this.gameState = gameState;
     }
-
-
-
 
 
     public Command processCommand(String stringCommand) {
@@ -118,6 +111,7 @@ public class Game {
 
     //update time according to the actions
     public void handleActionCost(int cost) {
+
         player.setTimeRemaining(player.getTimeRemaining() - cost);
     }
 
@@ -126,11 +120,6 @@ public class Game {
         if (win) {
             gameState = GameState.WON;
         }
-
-
-
-
-
 
     }
 
@@ -141,8 +130,6 @@ public class Game {
         }
 
     }
-
-
 
 
 }

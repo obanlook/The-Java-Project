@@ -4,10 +4,6 @@ public class AccessCard extends Item {
         super("AccessCard", "You can enter locked coaches by this card.\nif you use it you can unlock it forever.");
     }
 
-    @Override
-    public String examine() {
-        return "A reliable Access Card. It allows you to unlock locked coaches";
-    }
 
     @Override
     public boolean use(Player player) {
