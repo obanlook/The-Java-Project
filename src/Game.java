@@ -44,7 +44,7 @@ public class Game {
     public void startGame() {
 
         //Game introduction
-        System.out.println("Welcome to the Subway Survival Game!");
+        System.out.println("\nWelcome to the Subway Survival - The Interview Rush!");
         System.out.println("Press enter to continue...");
         Scanner input = new Scanner(System.in);
         input.nextLine();
