@@ -11,7 +11,7 @@ public class InventoryCommand implements Command {
         List<Item> items = inventory.getItems();
 
         System.out.println("\n======= INVENTORY =======");
-        System.out.println("Capacity: " + items.size() + " / " + inventory.getMAX());
+        System.out.println("Capacity: " + items.size() + " / " + inventory.getCapacity());
         System.out.println("--------------------------");
 
         if (items.isEmpty()) {

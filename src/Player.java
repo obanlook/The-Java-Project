@@ -3,14 +3,13 @@ import java.util.Set;
 
 public class Player {
 
-    private final Game game;
+
     private int timeRemaining;
     private final Set<Language> languages = new HashSet<>();
     private Location currentLocation;
     private final Inventory inventory;
 
-    public Player(Game game, Location startLocation) {
-        this.game = game;
+    public Player(Location startLocation) {
         this.currentLocation = startLocation;
         this.timeRemaining = 30;
 

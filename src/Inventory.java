@@ -2,18 +2,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Inventory {
-    private List<Item> items;
-    private final int MAX = 3;
+    //since the items will always reference to this list, the list will change but not the reference
+    //you can't make new items = new ArrayList<>(); which is good
+    //the list itself will not change, but its component will
+    private final List<Item> items;
+    private static final int CAPACITY = 3;
 
     public Inventory(){
-        items = new ArrayList<>(MAX);
+        items = new ArrayList<>(CAPACITY);
 
     }
 
 
     public boolean addItem(Item item){
-        if(items.size() >= MAX){
-            System.out.println("you can't have more than "+MAX+" items");
+        if(items.size() >= CAPACITY){
+            System.out.println("you can't have more than "+CAPACITY+" items");
             return false;
         }
         if(this.hasItemByName(item.getName())){
@@ -27,12 +30,14 @@ public class Inventory {
 
     //remove Item by an object of that item not by its name
     public boolean removeItem(Item item){
-        if(!this.hasItemByName(item.getName())){
+        if (!hasItemByName(item.getName())) {
             System.out.println("You don't have this item!");
+            return false;
         }
-        //remove the item if it has the same name with the input item
-        for(Item i : items){
-            if(i.getName().equalsIgnoreCase(item.getName())){
+
+        for (int i = 0; i < items.size(); i++) {
+            Item current = items.get(i);
+            if (current.getName().equalsIgnoreCase(item.getName())) {
                 items.remove(i);
                 return true;
             }
@@ -41,7 +46,8 @@ public class Inventory {
     }
 
 
-    //Getter
+
+    //Getters by name
 
     //get item by name
     public Item getItemByName(String itemName){
@@ -55,6 +61,9 @@ public class Inventory {
     public boolean hasItemByName(String name) {
         return getItemByName(name) != null;
     }
+//=================================================
+    //get copy of the field(s)
+
 
     //get the whole items
     //does not return the actual list but the copy in case of encapsulation
@@ -62,17 +71,11 @@ public class Inventory {
         return new ArrayList<>(items);//https://stackoverflow.com/questions/8441664/how-do-i-copy-the-contents-of-one-arraylist-into-another
     }
 
-    public int getMAX() {
-        return MAX;
+    public int getCapacity() {
+
+        return CAPACITY;
     }
 
-//    public int count(){
-//        return items.size();
-//    }
-//
-//    public boolean isFull(){
-//        return items.size() == MAX;
-//    }
 
 
 
