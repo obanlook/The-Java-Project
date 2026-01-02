@@ -1,6 +1,28 @@
+/**
+ * The StatusCommand class represents a command that displays
+ * the current status of the player.
+ * <p>
+ * This includes the player's location, remaining time,
+ * and the languages the player can communicate with.
+ * </p>
+ */
 public class StatusCommand implements Command {
+
+    /**
+     * The action cost associated with executing this command.
+     */
     private static final int COST = 0;
 
+    /**
+     * Executes the status command.
+     * <p>
+     * This method prints information about the player's current
+     * state, including location, remaining time, and known languages.
+     * </p>
+     *
+     * @param player the player executing the command
+     * @param game the current game instance
+     */
     @Override
     public void execute(Player player, Game game) {
 
@@ -27,4 +49,3 @@ public class StatusCommand implements Command {
         game.handleActionCost(COST);
     }
 }
-

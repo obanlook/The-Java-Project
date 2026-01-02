@@ -2,24 +2,55 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.Arrays;
 // https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/lang/String.html
+
+/**
+ * The CommandParser class is responsible for parsing raw user input
+ * and converting it into executable Command objects.
+ * <p>
+ * It validates commands, extracts command keywords and arguments,
+ * and returns the appropriate Command instance. If the input is invalid
+ * or unrecognized, an UnknownCommand is returned.
+ * </p>
+ */
 public class CommandParser {
 
+    /**
+     * Reference to the game instance.
+     * This allows commands to interact with the current game state.
+     */
     private final Game game;
 
-    // VALID COMMANDS
+    /**
+     * A set of all valid command keywords recognized by the parser.
+     */
     private static final Set<String> VALID = new HashSet<>(
             Arrays.asList("go", "look", "inventory", "help", "take","drop", "talk", "use", "quit", "status","explain")
     );
 
-    //constructor
+    /**
+     * Constructs a CommandParser with a reference to the game.
+     *
+     * @param game the current game instance
+     */
     public CommandParser(Game game) {
         this.game = game;
     }
 
-
-
-//     Parse a full input line (example: "go north")
-//     Always returns a Command — even if it's an UnknownCommand.
+    /**
+     * Parses a full input line entered by the player.
+     * <p>
+     * The input is trimmed, converted to lowercase, and split into parts.
+     * The first part is treated as the command verb, while subsequent parts
+     * may act as arguments depending on the command.
+     * </p>
+     * <p>
+     * This method always returns a Command object. If the input is invalid,
+     * empty, or unrecognized, an UnknownCommand is returned.
+     * </p>
+     *
+     * @param input the raw input string entered by the player
+     * @return a Command corresponding to the parsed input
+     */
     public Command parse(String input) {
         //if the input was space or enter only with no actual character
         if (input == null || input.isBlank())
@@ -53,10 +84,6 @@ public class CommandParser {
 
             case "explain":
                 return new ExplainCommand();
-
-
-
-
 
             //commands with two parts like go north, take Wrench
             case "go":
