@@ -1,7 +1,28 @@
+/**
+ * The HelpCommand class represents a command that displays
+ * a list of valid commands and their descriptions.
+ * <p>
+ * This command helps the player understand how to interact
+ * with the game by showing available actions.
+ * </p>
+ */
 public class HelpCommand implements Command {
 
+    /**
+     * The action cost associated with executing this command.
+     */
     private static final int COST = 0;
 
+    /**
+     * Executes the help command.
+     * <p>
+     * This method prints all available commands along with
+     * brief explanations of what each command does.
+     * </p>
+     *
+     * @param player the player executing the command
+     * @param game the current game instance
+     */
     @Override
     public void execute(Player player, Game game) {
 

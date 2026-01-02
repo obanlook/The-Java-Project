@@ -1,5 +1,23 @@
+/**
+ * The ExplainCommand class represents a command that explains the
+ * game’s storyline and objectives to the player.
+ * <p>
+ * When executed, this command prints an overview of the game scenario,
+ * the player's goal, and the conditions required to win.
+ * </p>
+ */
 public class ExplainCommand implements Command {
 
+    /**
+     * Executes the explain command.
+     * <p>
+     * This method displays the game background, objectives, and
+     * success conditions to the player.
+     * </p>
+     *
+     * @param player the player executing the command
+     * @param game the current game instance
+     */
     @Override
     public void execute(Player player, Game game) {
         System.out.println("\n===== GAME EXPLANATION =====\n");

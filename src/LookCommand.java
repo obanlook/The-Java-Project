@@ -1,8 +1,30 @@
+/**
+ * The LookCommand class represents a command that allows the player
+ * to observe their current location.
+ * <p>
+ * When executed, this command displays information about the current
+ * location, including its description, visible items, characters,
+ * and available exits, provided the player can see.
+ * </p>
+ */
 public class LookCommand implements Command {
 
+    /**
+     * The action cost associated with executing this command.
+     */
     private static final int COST = 0;
 
-
+    /**
+     * Executes the look command.
+     * <p>
+     * This method checks whether the player can see in the current location.
+     * If visibility conditions are met, it prints detailed information
+     * about the location.
+     * </p>
+     *
+     * @param player the player executing the command
+     * @param game the current game instance
+     */
     @Override
     public void execute(Player player, Game game) {
         Location location = player.getCurrentLocation();
@@ -31,9 +53,5 @@ public class LookCommand implements Command {
         System.out.println("Exits:\n"+ location.showExits());
 
         game.handleActionCost(COST);
-
-
     }
-
 }
-

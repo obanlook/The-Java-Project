@@ -1,12 +1,43 @@
+/**
+ * The TalkCommand class represents a command that allows the player
+ * to talk to a non-player character (NPC) in the current location.
+ * <p>
+ * Communication is only successful if the player understands at least
+ * one language spoken by the target character.
+ * </p>
+ */
 public class TalkCommand implements Command {
 
+    /**
+     * The action cost associated with executing this command.
+     */
     private static final int COST = 1;
+
+    /**
+     * The name of the character the player wants to talk to.
+     */
     private final String characterName;
 
+    /**
+     * Constructs a TalkCommand for a specific character.
+     *
+     * @param characterName the name of the character to talk to
+     */
     public TalkCommand(String characterName) {
         this.characterName = characterName;
     }
 
+    /**
+     * Executes the talk command.
+     * <p>
+     * This method searches for a character in the current location,
+     * checks whether communication is possible based on shared languages,
+     * and displays the character's dialogue if successful.
+     * </p>
+     *
+     * @param player the player executing the command
+     * @param game the current game instance
+     */
     @Override
     public void execute(Player player, Game game) {
 
